@@ -1,156 +1,135 @@
-## Capstone Project — Automated ML Multi-Agent System
+## Multi-Agent DevBot — Google × Kaggle Capstone Project
 
-A submission for the Google × Kaggle 5-Day Agents Capstone
+1. Introduction
+This project is my submission for the Google × Kaggle 5-Day Generative AI Agents Course Capstone.
+I built a simple multi-agent system that can help with software development tasks such as researching a topic, drafting basic code, and testing the generated code.
+The idea is to show how different agents can work together, each handling one responsibility.
 
-Project Overview
+The project is created using Python and follows the concepts taught in the course.
 
-Traditional machine learning workflows require manual repetition of tasks like:
-1. data loading
-2. cleaning
-3. feature engineering
-4. training multiple models
-5. evaluating performance
-6. creating reports
+2. Problem Statement
+When we start working on a new programming task, we usually repeat the same steps:
 
-This project automates the entire ML pipeline using a multi-agent architecture powered by LLM reasoning.
+Search the internet
+Collect useful points
+Draft some initial code
+Check if the code works
 
-The system uses four cooperating agents, each handling a distinct step.
-This improves:
+Doing all this manually every time can be slow. So the aim here is to automate the first version of this process. Not to replace developers, but to help save time in the early stages.
 
-1.reproducibility
-2.automation
-3.speed
-4.reliability
+3. Proposed Solution
+The solution is a simple multi-agent system with three agents:
 
-🧠 Why Agents?
+1. Research Agent
+Takes a topic and produces a small research summary (simulated).
 
-Agents are ideal because ML workflows are:
+2. Coding Agent
+Uses the research result to generate a basic Python function.
 
-modular (different tasks)
+3. Testing Agent
+Runs checks to ensure the generated code does not crash.
 
-repeatable
+All three are connected through a manager that sends the output of one agent to the next.
 
-sequenced (A → B → C → D)
+4. Architecture Overview
+User Input
+    ↓
+Research Agent
+    ↓
+Coding Agent
+    ↓
+Testing Agent
+    ↓
+Final Output
 
-data-dependent
+Each agent is a separate Python module, and the manager coordinates the workflow step-by-step.
 
-Using multiple agents allows:
+5. Features Implemented (as required by Capstone)
+✔ Multi-Agent Syste
+Three agents working in a sequence, each with a narrow role.
+✔ Tools
+A simulated web search tool
+A simple code quality checker
+✔ Session / State Flow
+The output moves from one agent to another in a controlled order.
+✔ Observability
+Each step prints what it’s doing so it’s clear how the system is working.
 
-task specialization
-
-parallelization (optional)
-
-clearer separation of responsibilities
-
-better observability
-
-🔧 Agents Included
-1️⃣ DataAgent
-
-Handles:
-
-loading the dataset
-
-preprocessing
-
-label encoding
-
-handling missing values
-
-2️⃣ TrainingAgent
-
-Responsible for:
-
-splitting data
-
-selecting ML algorithms
-
-training models
-
-3️⃣ EvaluationAgent
-
-Performs:
-
-model prediction
-
-accuracy computation
-
-classification metrics
-
-analysis of errors
-
-4️⃣ ReportAgent
-
-Creates:
-
-1.feature importance charts
-2.final report assets
-3.visual outputs for submission
-
-🏗️ Architecture
-              ┌──────────────────┐
-              │   DataAgent       │
-              │ Load + Preprocess │
-              └─────────┬────────┘
-                        │
-                        ▼
-             ┌────────────────────┐
-             │   TrainingAgent     │
-             │ Train ML Model      │
-             └─────────┬──────────┘
-                       │
-                       ▼
-          ┌─────────────────────────┐
-          │     EvaluationAgent      │
-          │ Accuracy + Classification│
-          └───────────┬─────────────┘
-                      │
-                      ▼
-            ┌──────────────────────┐
-            │    ReportAgent        │
-            │   Graphs + Summary    │
-            └──────────────────────┘
-📚 Tech Stack
-
-1.Python 3.10+
-2.Pandas (data handling)
-3.NumPy (numeric operations)
-4.Scikit-Learn (models)
-5.Matplotlib (visual reports)
-
-repository structure
-capstone-ai-agent/
-│── README.md
-│── requirements.txt
-│── orchestrator.py
+6. Folder Structure
+multi-agent-dev-bot/
 │
-│── agents/
-│   │── data_agent.py
-│   │── training_agent.py
-│   │── evaluation_agent.py
-│   │── report_agent.py
+├── main.py
+├── README.md
 │
-│── data/
-│   └── dataset.csv
+├── agents/
+│   ├── research_agent.py
+│   ├── coding_agent.py
+│   ├── testing_agent.py
+│   └── __init__.py
 │
-│── models/
-│── reports/
+├── manager/
+│   ├── task_manager.py
+│   └── __init__.py
+│
+└── utils/
+    ├── tools.py
+    └── __init__.py
 
-🚀 How to Run
-Step 1: Install requirements
-pip install -r requirements.txt
+7. How It Works (Simple Explanation)
 
-Step 2: Place your dataset
-data/dataset.csv
+The user types a topic.
+Research Agent prepares a short “research-like” summary.
+Coding Agent writes a basic Python function using that summary.
+Testing Agent runs the code safely.
+Everything is printed clearly at the end.
+This is not meant to create perfect code — just to demonstrate how agents can work together.
 
-Step 3: Run the main orchestrator
-python orchestrator.py
+8. Running the Project
+Step 1: Clone the repo
+git clone https://github.com/<your-username>/multi-agent-dev-bot.git
+cd multi-agent-dev-bot
 
-Manual ML pipelines are slow and require repeated human effort.
-my solution automates:
-✔ cleaning
-✔ training
-✔ evaluating
-✔ reporting
+Step 2: Run
+python main.py
 
-This reduces time from hours to minutes.
+
+No API keys or external setups are needed.
+
+9. Example Output
+=== Multi-Agent Workflow ===
+Research Agent researching topic...
+Coding Agent generating code...
+Testing Agent running tests...
+
+FINAL OUTPUT:
+Research Summary: ...
+Generated Code: ...
+Testing Result: All tests passed.
+
+10. Why This Project Is Useful
+
+Demonstrates understanding of multi-agent systems.
+Easy to extend into more complex agents later.
+Works offline and requires no paid models.
+Good starting point for experimenting with agent workflows.
+
+11. Future Improvements
+
+If I expand this later, I may add:
+Real web search tools
+Better code generation
+Deployment using Cloud Run
+
+A dashboard UI
+
+A short YouTube demo video for bonus marks
+
+12. Author
+
+BUVAN R
+Google × Kaggle Generative AI Agents Course
+2025
+
+ GitHub project
+
+ Under 1500 words
